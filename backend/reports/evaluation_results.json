@@ -1,0 +1,700 @@
+{
+  "generated_at": "2026-10-19T06:48:39+00:00",
+  "runtime_seconds": 3.8,
+  "synthetic": true,
+  "config": {
+    "seed": 42,
+    "generated_per_family": 8,
+    "ks": [
+      3,
+      5,
+      10
+    ],
+    "relevance_threshold": 2,
+    "bootstrap_resamples": 1000
+  },
+  "dataset": {
+    "n_jobs": 32,
+    "n_candidates": 122,
+    "n_hand_written_candidates": 18,
+    "n_generated_candidates": 104,
+    "n_labelled_pairs": 3904,
+    "grade_distribution": {
+      "0": 3013,
+      "1": 535,
+      "2": 125,
+      "3": 231
+    },
+    "label_definition": "grade = 0.35*role_family_match (1 same, 0.5 adjacent, 0 otherwise) + 0.50*true_required_skill_coverage + 0.15*experience_in_loose_range + Gaussian noise (sd 0.05); grade 3 if >= 0.80, 2 if >= 0.62, 1 if >= 0.40, else 0. Relevant (for Precision/Recall/MRR) means grade >= 2."
+  },
+  "directions": {
+    "recruiter": {
+      "description": "Recruiter task: for each job, rank all candidates.",
+      "n_queries": 32,
+      "n_queries_evaluated": 32,
+      "n_queries_skipped_no_relevant": 0,
+      "ks": [
+        3,
+        5,
+        10
+      ],
+      "methods": {
+        "random": {
+          "label": "Random (seeded)",
+          "description": "Pseudo-random order; the floor every real method should beat.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.0729,
+              "ci_low": 0.0208,
+              "ci_high": 0.125
+            },
+            "recall@3": {
+              "mean": 0.0199,
+              "ci_low": 0.0066,
+              "ci_high": 0.0335
+            },
+            "ndcg@3": {
+              "mean": 0.0604,
+              "ci_low": 0.0304,
+              "ci_high": 0.0935
+            },
+            "precision@5": {
+              "mean": 0.075,
+              "ci_low": 0.0375,
+              "ci_high": 0.1125
+            },
+            "recall@5": {
+              "mean": 0.0323,
+              "ci_low": 0.0164,
+              "ci_high": 0.049
+            },
+            "ndcg@5": {
+              "mean": 0.0602,
+              "ci_low": 0.0357,
+              "ci_high": 0.0875
+            },
+            "precision@10": {
+              "mean": 0.0844,
+              "ci_low": 0.0563,
+              "ci_high": 0.1125
+            },
+            "recall@10": {
+              "mean": 0.0733,
+              "ci_low": 0.0508,
+              "ci_high": 0.0968
+            },
+            "ndcg@10": {
+              "mean": 0.0852,
+              "ci_low": 0.0609,
+              "ci_high": 0.1089
+            },
+            "mrr": {
+              "mean": 0.1979,
+              "ci_low": 0.1363,
+              "ci_high": 0.2731
+            }
+          }
+        },
+        "tfidf": {
+          "label": "TF-IDF baseline",
+          "description": "Cosine similarity of TF-IDF vectors of profile text vs job text only.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.9792,
+              "ci_low": 0.9375,
+              "ci_high": 1.0
+            },
+            "recall@3": {
+              "mean": 0.2781,
+              "ci_low": 0.2548,
+              "ci_high": 0.3031
+            },
+            "ndcg@3": {
+              "mean": 0.9049,
+              "ci_low": 0.8492,
+              "ci_high": 0.9548
+            },
+            "precision@5": {
+              "mean": 0.9688,
+              "ci_low": 0.9188,
+              "ci_high": 1.0
+            },
+            "recall@5": {
+              "mean": 0.4566,
+              "ci_low": 0.4237,
+              "ci_high": 0.49
+            },
+            "ndcg@5": {
+              "mean": 0.8995,
+              "ci_low": 0.8484,
+              "ci_high": 0.9441
+            },
+            "precision@10": {
+              "mean": 0.8656,
+              "ci_low": 0.8125,
+              "ci_high": 0.9063
+            },
+            "recall@10": {
+              "mean": 0.8098,
+              "ci_low": 0.7471,
+              "ci_high": 0.868
+            },
+            "ndcg@10": {
+              "mean": 0.9173,
+              "ci_low": 0.8749,
+              "ci_high": 0.9503
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_low": 1.0,
+              "ci_high": 1.0
+            }
+          }
+        },
+        "text_semantic": {
+          "label": "TF-IDF + semantic (LSA)",
+          "description": "Text-only: blends TF-IDF cosine with a local LSA embedding cosine.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.9583,
+              "ci_low": 0.8958,
+              "ci_high": 1.0
+            },
+            "recall@3": {
+              "mean": 0.269,
+              "ci_low": 0.25,
+              "ci_high": 0.2877
+            },
+            "ndcg@3": {
+              "mean": 0.8919,
+              "ci_low": 0.8277,
+              "ci_high": 0.9444
+            },
+            "precision@5": {
+              "mean": 0.9625,
+              "ci_low": 0.9125,
+              "ci_high": 0.9938
+            },
+            "recall@5": {
+              "mean": 0.4527,
+              "ci_low": 0.4213,
+              "ci_high": 0.4858
+            },
+            "ndcg@5": {
+              "mean": 0.8891,
+              "ci_low": 0.8366,
+              "ci_high": 0.9357
+            },
+            "precision@10": {
+              "mean": 0.8438,
+              "ci_low": 0.7937,
+              "ci_high": 0.8906
+            },
+            "recall@10": {
+              "mean": 0.7911,
+              "ci_low": 0.7276,
+              "ci_high": 0.8527
+            },
+            "ndcg@10": {
+              "mean": 0.8998,
+              "ci_low": 0.8557,
+              "ci_high": 0.937
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_low": 1.0,
+              "ci_high": 1.0
+            }
+          }
+        },
+        "skills_only": {
+          "label": "Skills only",
+          "description": "75% required-skill coverage + 25% preferred-skill overlap; no text.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.9583,
+              "ci_low": 0.8958,
+              "ci_high": 1.0
+            },
+            "recall@3": {
+              "mean": 0.272,
+              "ci_low": 0.2479,
+              "ci_high": 0.2964
+            },
+            "ndcg@3": {
+              "mean": 0.8972,
+              "ci_low": 0.8413,
+              "ci_high": 0.9475
+            },
+            "precision@5": {
+              "mean": 0.9625,
+              "ci_low": 0.9187,
+              "ci_high": 0.9938
+            },
+            "recall@5": {
+              "mean": 0.4572,
+              "ci_low": 0.42,
+              "ci_high": 0.4957
+            },
+            "ndcg@5": {
+              "mean": 0.8892,
+              "ci_low": 0.8414,
+              "ci_high": 0.9354
+            },
+            "precision@10": {
+              "mean": 0.8188,
+              "ci_low": 0.7656,
+              "ci_high": 0.8656
+            },
+            "recall@10": {
+              "mean": 0.7676,
+              "ci_low": 0.7086,
+              "ci_high": 0.8289
+            },
+            "ndcg@10": {
+              "mean": 0.8808,
+              "ci_low": 0.8347,
+              "ci_high": 0.9201
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_low": 1.0,
+              "ci_high": 1.0
+            }
+          }
+        },
+        "hybrid": {
+          "label": "Hybrid (MatchMind)",
+          "description": "Required + preferred skills, text (TF-IDF+semantic), role, experience and location.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.9688,
+              "ci_low": 0.9271,
+              "ci_high": 1.0
+            },
+            "recall@3": {
+              "mean": 0.2742,
+              "ci_low": 0.2562,
+              "ci_high": 0.2914
+            },
+            "ndcg@3": {
+              "mean": 0.9005,
+              "ci_low": 0.8397,
+              "ci_high": 0.9504
+            },
+            "precision@5": {
+              "mean": 0.9625,
+              "ci_low": 0.9062,
+              "ci_high": 1.0
+            },
+            "recall@5": {
+              "mean": 0.4522,
+              "ci_low": 0.4199,
+              "ci_high": 0.4858
+            },
+            "ndcg@5": {
+              "mean": 0.902,
+              "ci_low": 0.8524,
+              "ci_high": 0.9488
+            },
+            "precision@10": {
+              "mean": 0.875,
+              "ci_low": 0.8312,
+              "ci_high": 0.9125
+            },
+            "recall@10": {
+              "mean": 0.8188,
+              "ci_low": 0.7706,
+              "ci_high": 0.8713
+            },
+            "ndcg@10": {
+              "mean": 0.9268,
+              "ci_low": 0.8965,
+              "ci_high": 0.9536
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_low": 1.0,
+              "ci_high": 1.0
+            }
+          }
+        }
+      },
+      "paired_comparisons": [
+        {
+          "metric": "ndcg@3",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": -0.0044,
+          "ci_low": -0.0395,
+          "ci_high": 0.0278,
+          "ci_excludes_zero": false
+        },
+        {
+          "metric": "ndcg@5",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0025,
+          "ci_low": -0.0148,
+          "ci_high": 0.0196,
+          "ci_excludes_zero": false
+        },
+        {
+          "metric": "ndcg@10",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0095,
+          "ci_low": -0.0179,
+          "ci_high": 0.0372,
+          "ci_excludes_zero": false
+        },
+        {
+          "metric": "mrr",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "ci_excludes_zero": false
+        }
+      ]
+    },
+    "seeker": {
+      "description": "Job-seeker task: for each candidate, rank all jobs.",
+      "n_queries": 122,
+      "n_queries_evaluated": 122,
+      "n_queries_skipped_no_relevant": 0,
+      "ks": [
+        3,
+        5,
+        10
+      ],
+      "methods": {
+        "random": {
+          "label": "Random (seeded)",
+          "description": "Pseudo-random order; the floor every real method should beat.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.0929,
+              "ci_low": 0.0628,
+              "ci_high": 0.123
+            },
+            "recall@3": {
+              "mean": 0.0939,
+              "ci_low": 0.0635,
+              "ci_high": 0.1236
+            },
+            "ndcg@3": {
+              "mean": 0.1085,
+              "ci_low": 0.0836,
+              "ci_high": 0.1332
+            },
+            "precision@5": {
+              "mean": 0.0967,
+              "ci_low": 0.0754,
+              "ci_high": 0.1197
+            },
+            "recall@5": {
+              "mean": 0.1568,
+              "ci_low": 0.1187,
+              "ci_high": 0.1965
+            },
+            "ndcg@5": {
+              "mean": 0.1459,
+              "ci_low": 0.1209,
+              "ci_high": 0.1729
+            },
+            "precision@10": {
+              "mean": 0.1,
+              "ci_low": 0.086,
+              "ci_high": 0.1156
+            },
+            "recall@10": {
+              "mean": 0.3501,
+              "ci_low": 0.2994,
+              "ci_high": 0.4019
+            },
+            "ndcg@10": {
+              "mean": 0.2207,
+              "ci_low": 0.1954,
+              "ci_high": 0.247
+            },
+            "mrr": {
+              "mean": 0.2316,
+              "ci_low": 0.1931,
+              "ci_high": 0.2709
+            }
+          }
+        },
+        "tfidf": {
+          "label": "TF-IDF baseline",
+          "description": "Cosine similarity of TF-IDF vectors of profile text vs job text only.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.7568,
+              "ci_low": 0.7158,
+              "ci_high": 0.7951
+            },
+            "recall@3": {
+              "mean": 0.8347,
+              "ci_low": 0.7912,
+              "ci_high": 0.8749
+            },
+            "ndcg@3": {
+              "mean": 0.9201,
+              "ci_low": 0.8974,
+              "ci_high": 0.9387
+            },
+            "precision@5": {
+              "mean": 0.5098,
+              "ci_low": 0.4787,
+              "ci_high": 0.5393
+            },
+            "recall@5": {
+              "mean": 0.9081,
+              "ci_low": 0.8784,
+              "ci_high": 0.9376
+            },
+            "ndcg@5": {
+              "mean": 0.9099,
+              "ci_low": 0.8915,
+              "ci_high": 0.9258
+            },
+            "precision@10": {
+              "mean": 0.282,
+              "ci_low": 0.2639,
+              "ci_high": 0.3
+            },
+            "recall@10": {
+              "mean": 0.9765,
+              "ci_low": 0.9601,
+              "ci_high": 0.9906
+            },
+            "ndcg@10": {
+              "mean": 0.9204,
+              "ci_low": 0.9062,
+              "ci_high": 0.9323
+            },
+            "mrr": {
+              "mean": 0.9863,
+              "ci_low": 0.9672,
+              "ci_high": 1.0
+            }
+          }
+        },
+        "text_semantic": {
+          "label": "TF-IDF + semantic (LSA)",
+          "description": "Text-only: blends TF-IDF cosine with a local LSA embedding cosine.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.724,
+              "ci_low": 0.6831,
+              "ci_high": 0.7596
+            },
+            "recall@3": {
+              "mean": 0.803,
+              "ci_low": 0.7614,
+              "ci_high": 0.8457
+            },
+            "ndcg@3": {
+              "mean": 0.8954,
+              "ci_low": 0.8716,
+              "ci_high": 0.9153
+            },
+            "precision@5": {
+              "mean": 0.5033,
+              "ci_low": 0.4721,
+              "ci_high": 0.5312
+            },
+            "recall@5": {
+              "mean": 0.8969,
+              "ci_low": 0.8654,
+              "ci_high": 0.928
+            },
+            "ndcg@5": {
+              "mean": 0.8951,
+              "ci_low": 0.8748,
+              "ci_high": 0.9127
+            },
+            "precision@10": {
+              "mean": 0.277,
+              "ci_low": 0.259,
+              "ci_high": 0.2943
+            },
+            "recall@10": {
+              "mean": 0.9652,
+              "ci_low": 0.9462,
+              "ci_high": 0.9822
+            },
+            "ndcg@10": {
+              "mean": 0.9038,
+              "ci_low": 0.888,
+              "ci_high": 0.9181
+            },
+            "mrr": {
+              "mean": 0.9822,
+              "ci_low": 0.9631,
+              "ci_high": 0.9959
+            }
+          }
+        },
+        "skills_only": {
+          "label": "Skills only",
+          "description": "75% required-skill coverage + 25% preferred-skill overlap; no text.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.7923,
+              "ci_low": 0.7514,
+              "ci_high": 0.8307
+            },
+            "recall@3": {
+              "mean": 0.8678,
+              "ci_low": 0.8314,
+              "ci_high": 0.9029
+            },
+            "ndcg@3": {
+              "mean": 0.935,
+              "ci_low": 0.9164,
+              "ci_high": 0.9535
+            },
+            "precision@5": {
+              "mean": 0.5443,
+              "ci_low": 0.5098,
+              "ci_high": 0.577
+            },
+            "recall@5": {
+              "mean": 0.9511,
+              "ci_low": 0.9303,
+              "ci_high": 0.9712
+            },
+            "ndcg@5": {
+              "mean": 0.9329,
+              "ci_low": 0.9175,
+              "ci_high": 0.946
+            },
+            "precision@10": {
+              "mean": 0.2877,
+              "ci_low": 0.268,
+              "ci_high": 0.3066
+            },
+            "recall@10": {
+              "mean": 0.9915,
+              "ci_low": 0.9824,
+              "ci_high": 0.9984
+            },
+            "ndcg@10": {
+              "mean": 0.9384,
+              "ci_low": 0.9264,
+              "ci_high": 0.9499
+            },
+            "mrr": {
+              "mean": 0.9959,
+              "ci_low": 0.9877,
+              "ci_high": 1.0
+            }
+          }
+        },
+        "hybrid": {
+          "label": "Hybrid (MatchMind)",
+          "description": "Required + preferred skills, text (TF-IDF+semantic), role, experience and location.",
+          "metrics": {
+            "precision@3": {
+              "mean": 0.8115,
+              "ci_low": 0.7678,
+              "ci_high": 0.8525
+            },
+            "recall@3": {
+              "mean": 0.881,
+              "ci_low": 0.8464,
+              "ci_high": 0.9133
+            },
+            "ndcg@3": {
+              "mean": 0.9575,
+              "ci_low": 0.9432,
+              "ci_high": 0.9706
+            },
+            "precision@5": {
+              "mean": 0.5541,
+              "ci_low": 0.5197,
+              "ci_high": 0.5869
+            },
+            "recall@5": {
+              "mean": 0.9652,
+              "ci_low": 0.9466,
+              "ci_high": 0.9807
+            },
+            "ndcg@5": {
+              "mean": 0.9552,
+              "ci_low": 0.9463,
+              "ci_high": 0.9641
+            },
+            "precision@10": {
+              "mean": 0.2902,
+              "ci_low": 0.2697,
+              "ci_high": 0.3098
+            },
+            "recall@10": {
+              "mean": 0.9966,
+              "ci_low": 0.9911,
+              "ci_high": 1.0
+            },
+            "ndcg@10": {
+              "mean": 0.9553,
+              "ci_low": 0.9473,
+              "ci_high": 0.9629
+            },
+            "mrr": {
+              "mean": 1.0,
+              "ci_low": 1.0,
+              "ci_high": 1.0
+            }
+          }
+        }
+      },
+      "paired_comparisons": [
+        {
+          "metric": "ndcg@3",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0373,
+          "ci_low": 0.0199,
+          "ci_high": 0.0555,
+          "ci_excludes_zero": true
+        },
+        {
+          "metric": "ndcg@5",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0452,
+          "ci_low": 0.0299,
+          "ci_high": 0.0609,
+          "ci_excludes_zero": true
+        },
+        {
+          "metric": "ndcg@10",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0348,
+          "ci_low": 0.0243,
+          "ci_high": 0.0457,
+          "ci_excludes_zero": true
+        },
+        {
+          "metric": "mrr",
+          "a": "hybrid",
+          "b": "tfidf",
+          "mean_difference": 0.0137,
+          "ci_low": 0.0,
+          "ci_high": 0.0301,
+          "ci_excludes_zero": false
+        }
+      ]
+    }
+  },
+  "caveats": [
+    "All jobs, candidates and relevance labels are synthetic and rule-generated. Results show how the pipeline works, not real hiring accuracy.",
+    "Labels use concepts (skills, role family, experience) that the hybrid scorer also uses, so it has a structural advantage over the text-only baseline.",
+    "Candidate profiles are small (tens to ~120), so confidence intervals are wide; read differences together with the CIs.",
+    "No protected attributes (age, gender, ethnicity, photo, ...) exist in the data or are used by any method."
+  ]
+}

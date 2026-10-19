@@ -1,0 +1,3 @@
+# OPTIONAL: neural sentence embeddings. Not needed - the app falls back to a local LSA encoder.
+# Installing this downloads a model from the internet on first use.
+sentence-transformers>=3.0

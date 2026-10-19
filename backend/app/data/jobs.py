@@ -1,0 +1,123 @@
+"""32 FICTIONAL job listings (synthetic demonstration data). Companies and roles are invented."""
+from __future__ import annotations
+
+
+def _job(title, company, location, mode, seniority, min_y, max_y, sal, family, required, preferred, description, emp="full-time"):
+    return {
+        "title": title, "company": company, "location": location, "work_mode": mode,
+        "employment_type": emp, "seniority": seniority, "min_years": min_y, "max_years": max_y,
+        "salary_min": sal[0], "salary_max": sal[1], "role_family": family,
+        "required_skills": required, "preferred_skills": preferred, "description": description,
+    }
+
+
+SEED_JOBS: list[dict] = [
+    # ---- backend
+    _job("Senior Backend Engineer", "Lumenfield", "Remote", "remote", "senior", 5, 9, (130000, 175000), "backend",
+         ["python", "fastapi", "postgresql", "docker", "rest apis"], ["redis", "kubernetes", "aws", "ci/cd"],
+         "Own the core scheduling API behind Lumenfield's energy-forecasting platform. You will design resilient services, tune slow queries and mentor engineers on clean API design and automated testing."),
+    _job("Backend Engineer, Payments", "Harborlight Finance", "London, UK", "hybrid", "mid", 3, 6, (85000, 120000), "backend",
+         ["java", "spring boot", "postgresql", "rest apis", "kafka"], ["aws", "docker", "microservices"],
+         "Build and operate payment-processing microservices that handle reconciliation and settlement events. Emphasis on correctness, idempotent APIs and event-driven design with Kafka."),
+    _job("Junior Python Developer", "Kitebridge", "Bengaluru, IN", "hybrid", "junior", 0, 2, (30000, 48000), "backend",
+         ["python", "sql", "git", "rest apis"], ["flask", "docker", "pytest"],
+         "Join a friendly platform team writing internal tools and small REST services in Python. Great first role for someone who has finished a bootcamp or degree project and wants code review and mentorship."),
+    # ---- frontend
+    _job("Frontend Engineer", "Orbitly", "Remote", "remote", "mid", 3, 6, (95000, 135000), "frontend",
+         ["react", "typescript", "css", "html", "rest apis"], ["next.js", "jest", "accessibility", "graphql"],
+         "Build the customer dashboard for a logistics-tracking product used by thousands of dispatchers. You will ship accessible, responsive React interfaces and improve front-end performance."),
+    _job("Senior Frontend Engineer, Design Systems", "Brightforge", "Berlin, DE", "hybrid", "senior", 6, 10, (90000, 125000), "frontend",
+         ["react", "typescript", "design systems", "css", "accessibility"], ["storybook", "figma", "jest"],
+         "Lead the component library that powers every Brightforge product. Partner with designers on tokens and patterns, drive accessibility standards and keep the library fast, documented and well tested."),
+    _job("UI Engineer (Vue)", "Pinecrest Retail", "Toronto, CA", "hybrid", "mid", 2, 5, (75000, 105000), "frontend",
+         ["vue", "javascript", "css", "html"], ["typescript", "tailwind", "cypress"],
+         "Maintain and extend a Vue storefront used across a regional retail chain. Focus on component quality, cross-browser behaviour and checkout usability."),
+    # ---- full stack
+    _job("Full-Stack Engineer", "Wrenly", "Austin, US", "hybrid", "mid", 3, 6, (110000, 150000), "fullstack",
+         ["typescript", "react", "node.js", "postgresql", "rest apis"], ["docker", "aws", "graphql"],
+         "Ship customer-facing features for a scheduling SaaS from database migration to polished UI. Small team, high ownership, weekly releases."),
+    _job("Founding Full-Stack Engineer", "Cinderpeak", "Remote", "remote", "senior", 5, 10, (120000, 165000), "fullstack",
+         ["python", "react", "postgresql", "docker", "ci/cd"], ["fastapi", "aws", "terraform"],
+         "Be one of the first engineers at an early-stage climate-reporting startup. Build the product, set up deployment pipelines and help shape engineering culture."),
+    # ---- data science
+    _job("Data Scientist", "Quillstone Analytics", "London, UK", "hybrid", "mid", 2, 5, (75000, 105000), "data_science",
+         ["python", "statistics", "pandas", "scikit-learn", "sql"], ["a/b testing", "tableau", "time series"],
+         "Develop churn and demand models for subscription clients and present insights to non-technical stakeholders. You will own experiments from hypothesis to readout."),
+    _job("Senior Data Scientist, Experimentation", "Vantaworks", "Remote", "remote", "senior", 5, 9, (140000, 185000), "data_science",
+         ["python", "statistics", "a/b testing", "sql", "experimentation"], ["causal inference", "r", "feature engineering"],
+         "Lead the experimentation platform strategy: power analysis, sequential testing and causal methods. Coach product teams on designing trustworthy experiments."),
+    _job("Applied Data Scientist, Healthcare", "Tessellate Health", "Toronto, CA", "hybrid", "mid", 3, 6, (90000, 125000), "data_science",
+         ["python", "machine learning", "scikit-learn", "sql", "statistics"], ["r", "nlp", "mlflow"],
+         "Apply machine learning to de-identified scheduling and resource-planning data for hospitals. Emphasis on careful validation, interpretability and clear documentation."),
+    # ---- ML engineering
+    _job("Machine Learning Engineer", "Sable Robotics", "San Francisco, US", "onsite", "mid", 3, 7, (140000, 185000), "ml_engineering",
+         ["python", "pytorch", "machine learning", "docker"], ["mlops", "kubernetes", "aws", "computer vision"],
+         "Train and deploy perception models for warehouse robots. You will build reproducible training pipelines, optimise inference latency and monitor models in production."),
+    _job("NLP Engineer", "Fernhill Education", "Remote", "remote", "mid", 3, 6, (100000, 140000), "ml_engineering",
+         ["python", "nlp", "pytorch", "machine learning", "llms"], ["prompt engineering", "fastapi", "elasticsearch"],
+         "Build language-understanding features for an adaptive learning product: essay feedback, question generation and semantic search over course content."),
+    _job("Senior ML Engineer, Recommendations", "Pinecrest Retail", "Bengaluru, IN", "hybrid", "senior", 5, 10, (55000, 85000), "ml_engineering",
+         ["python", "recommender systems", "machine learning", "pytorch", "spark"], ["mlops", "kafka", "airflow", "aws"],
+         "Own the personalised product-ranking models serving millions of daily sessions. Design offline evaluation, ship online experiments and scale feature pipelines."),
+    # ---- data engineering
+    _job("Data Engineer", "Nimbus Grid", "Berlin, DE", "hybrid", "mid", 2, 5, (70000, 98000), "data_engineering",
+         ["python", "sql", "airflow", "spark", "etl"], ["dbt", "snowflake", "aws", "docker"],
+         "Build and maintain batch pipelines that move smart-meter readings into the analytics warehouse. Strong focus on data quality, monitoring and cost-efficient transformations."),
+    _job("Senior Data Engineer", "Harborlight Finance", "Singapore, SG", "hybrid", "senior", 6, 10, (110000, 150000), "data_engineering",
+         ["python", "spark", "kafka", "sql", "data modeling"], ["snowflake", "airflow", "terraform"],
+         "Design the streaming and batch platform behind risk and reporting data. Set standards for modelling, lineage and data-quality testing."),
+    _job("Analytics Engineer", "Mosaic Mobility", "Remote", "remote", "mid", 2, 5, (85000, 115000), "data_engineering",
+         ["sql", "dbt", "data modeling", "python"], ["looker", "airflow", "git"],
+         "Own the transformation layer that turns raw trip and billing data into trusted, documented models for analysts and finance."),
+    # ---- data analytics
+    _job("Data Analyst", "Pinecrest Retail", "Austin, US", "hybrid", "junior", 1, 3, (60000, 80000), "data_analytics",
+         ["sql", "excel", "tableau", "data visualization"], ["python", "power bi"],
+         "Support merchandising teams with weekly performance dashboards and ad-hoc SQL analyses. Clear communication and attention to detail matter more than years of experience."),
+    _job("Business Intelligence Analyst", "Vantaworks", "London, UK", "hybrid", "mid", 2, 5, (60000, 85000), "data_analytics",
+         ["sql", "power bi", "data visualization", "excel", "data modeling"], ["azure", "stakeholder management"],
+         "Design and maintain executive dashboards, define metric definitions with finance and operations, and train colleagues to self-serve."),
+    _job("Product Analyst", "Orbitly", "Remote", "remote", "mid", 2, 5, (90000, 120000), "data_analytics",
+         ["sql", "a/b testing", "data visualization"], ["python", "looker", "experimentation", "stakeholder management"],
+         "Partner with product squads to define success metrics, analyse funnels and evaluate experiments. You will turn product questions into clear recommendations."),
+    # ---- devops
+    _job("DevOps Engineer", "Brightforge", "Remote", "remote", "mid", 3, 6, (100000, 140000), "devops",
+         ["docker", "kubernetes", "terraform", "ci/cd", "linux", "aws"], ["prometheus", "grafana", "python"],
+         "Own CI/CD, cluster operations and infrastructure-as-code for a multi-team product platform. Reduce deployment friction and improve reliability."),
+    _job("Site Reliability Engineer", "Lumenfield", "London, UK", "hybrid", "senior", 5, 9, (105000, 145000), "devops",
+         ["kubernetes", "linux", "observability", "prometheus", "python", "incident response"], ["terraform", "go", "grafana", "gcp"],
+         "Keep a high-traffic forecasting service reliable. Define SLOs, lead incident reviews and automate toil away."),
+    _job("Cloud Platform Engineer", "Nimbus Grid", "Toronto, CA", "hybrid", "mid", 3, 6, (90000, 125000), "devops",
+         ["aws", "terraform", "docker", "ci/cd", "linux"], ["kubernetes", "github actions", "python", "ansible"],
+         "Build the paved road that lets product teams deploy to AWS safely: reusable Terraform modules, pipeline templates and guardrails."),
+    # ---- product
+    _job("Product Manager", "Wrenly", "San Francisco, US", "hybrid", "mid", 3, 7, (125000, 165000), "product",
+         ["product strategy", "roadmapping", "user research", "stakeholder management", "agile"], ["sql", "okrs", "a/b testing"],
+         "Own the roadmap for the scheduling experience. Run discovery with customers, prioritise ruthlessly and partner with design and engineering to ship measurable improvements."),
+    _job("Technical Product Manager, Platform", "Cinderpeak", "Remote", "remote", "senior", 5, 9, (135000, 175000), "product",
+         ["roadmapping", "stakeholder management", "rest apis", "product strategy", "agile"], ["sql", "okrs", "microservices"],
+         "Lead the product direction for developer-facing APIs and integrations. Translate partner needs into clear requirements and manage trade-offs with platform engineers."),
+    # ---- design
+    _job("Product Designer", "Fernhill Education", "Berlin, DE", "hybrid", "mid", 3, 6, (65000, 90000), "design",
+         ["figma", "user research", "wireframing", "prototyping"], ["design systems", "accessibility", "html", "css"],
+         "Design learner and teacher workflows end to end, from interviews and sketches to tested high-fidelity prototypes. Strong sense for accessibility and inclusive design."),
+    _job("Senior UX Researcher", "Tessellate Health", "Remote", "remote", "senior", 5, 9, (110000, 145000), "design",
+         ["user research", "usability testing", "stakeholder management"], ["statistics", "figma", "a/b testing"],
+         "Lead mixed-methods research for clinician-facing tools. Plan studies, synthesise insights and influence roadmap decisions."),
+    # ---- security
+    _job("Application Security Engineer", "Ironbark Security", "Singapore, SG", "hybrid", "mid", 3, 7, (100000, 140000), "security",
+         ["application security", "owasp", "threat modeling", "python", "penetration testing"], ["aws", "docker", "ci/cd"],
+         "Review designs and code for vulnerabilities, run penetration tests and build automated security checks into delivery pipelines."),
+    _job("Security Operations Analyst", "Ironbark Security", "Austin, US", "onsite", "junior", 1, 3, (65000, 85000), "security",
+         ["siem", "incident response", "networking", "linux"], ["python", "threat modeling", "iam"],
+         "Monitor alerts, triage incidents and document investigations in a 24/7 security operations centre. Training provided on detection engineering.", emp="contract"),
+    # ---- QA and mobile
+    _job("QA Automation Engineer", "Mosaic Mobility", "Bengaluru, IN", "hybrid", "mid", 2, 5, (30000, 50000), "qa",
+         ["test automation", "selenium", "python", "ci/cd"], ["pytest", "cypress", "docker"],
+         "Design and maintain automated UI and API test suites for a ride-booking platform. Reduce flaky tests and integrate checks into the release pipeline."),
+    _job("Mobile Engineer (React Native)", "Mosaic Mobility", "Remote", "remote", "mid", 3, 6, (95000, 130000), "mobile",
+         ["react native", "typescript", "rest apis", "git"], ["ios", "android", "jest", "ci/cd"],
+         "Build rider and driver app features used daily by customers. Care about performance, offline behaviour and smooth releases."),
+    _job("Android Engineer", "Kitebridge", "Singapore, SG", "hybrid", "mid", 3, 6, (85000, 115000), "mobile",
+         ["kotlin", "android", "rest apis", "git"], ["java", "ci/cd", "agile"],
+         "Develop native Android features for a fleet-management app, focusing on stability, accessibility and clean architecture."),
+]
